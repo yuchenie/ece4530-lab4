@@ -35,7 +35,7 @@
 						<value>1.4</value>
 					</var>
 					<var>vdd
-						<value>2.4</value>
+						<value>2.5</value>
 					</var>
 				</vars>
 				<origoptions></origoptions>
@@ -68,7 +68,7 @@
 		</checksasserts>
 		<plottingoptions>
 			<plottingoption>waveformtemplate
-				<value>(None)</value>
+				<value></value>
 			</plottingoption>
 			<plottingoption>plottingmode
 				<value>Append</value>
@@ -80,7 +80,7 @@
 				<value>no</value>
 			</plottingoption>
 			<plottingoption>useMaestroPlottingTemplate
-				<value>yes</value>
+				<value>no</value>
 			</plottingoption>
 			<plottingoption>allplottingtemplates
 				<value></value>
