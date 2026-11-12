@@ -1,16 +1,15 @@
-# ECE 4530 Lab 3
+# ECE 4530 Lab 4
 
-Cadence Virtuoso library for Lab 3. This whole folder is one Cadence library
-named **`lab3`**.
+Cadence Virtuoso library for Lab 4. This whole folder is one Cadence library
+named **`lab4`**.
 
 ## Contents
 
 | Path | What it is |
 | --- | --- |
-| `Lab3_dummy/` | Verilog-A model (`veriloga`), with its schematic and symbol |
-| `lab3_v1/` | Lab 3 circuit (schematic + symbol) |
-| `lab3_testbench/` | Testbench for `lab3_v1` (schematic + Maestro setup) |
-| `step1/` | Plots from the `Lab3_dummy` Verilog-A simulations |
+| `lab4_v1/` | Lab 4 circuit (schematic + symbol) |
+| `lab4_testbench/` | Testbench for `lab4_v1` (schematic + Maestro setup) |
+| `nmos_characterization/` | NMOS characterization testbench (schematic + Maestro setup) |
 | `cdsinfo.tag`, `.oalib`, `data.dm` | Cadence library files. Leave these alone. |
 
 ## Setup
@@ -19,22 +18,22 @@ named **`lab3`**.
 
    ```
    cd ~/ece4530
-   git clone https://github.com/zoeeechiu/analog-lab3 lab3
+   git clone git@github.com:yuchenie/ece4530-lab4.git lab4
    ```
 
 2. Add this line to your `cds.lib`, using the full path to the folder you just cloned:
 
    ```
-   DEFINE lab3 /home/<netid>/ece4530/lab3
+   DEFINE lab4 /home/<netid>/ece4530/lab4
    ```
 
-   The library name must be `lab3`, because the schematics refer to their cells
-   as `lab3/...`. The folder itself can be called anything.
+   The library name must be `lab4`, because the schematics refer to their cells
+   as `lab4/...`. The folder itself can be called anything.
 
-3. Restart Virtuoso, or use View -> Refresh in Library Manager. `lab3` should show up.
+3. Restart Virtuoso, or use View -> Refresh in Library Manager. `lab4` should show up.
 
-4. Before the first simulation, open `lab3_testbench/schematic` and run
-   **Check and Save** (Shift+X). Then run `lab3_testbench/maestro`.
+4. Before the first simulation, open `lab4_testbench/schematic` and run
+   **Check and Save** (Shift+X). Then run `lab4_testbench/maestro`.
 
 ## Workflow
 
@@ -49,6 +48,7 @@ git push
 - Save (or close) a cellview in Cadence before committing it.
 - `.oa` files are binary, so git cannot merge them. If two people edit the same
   cellview at the same time, one person's changes get lost. Coordinate before
-  editing a shared cell, or make your own copy with your NetID in the name.
+  editing a shared cell, work on separate branches, or make your own copy with
+  your NetID in the name.
 - `.gitignore` keeps Cadence lock files (`*.cdslck*`), `.bak` files, and
   Maestro `results/` and `history/` folders out of the repo.
