@@ -31,18 +31,6 @@
 					</option>
 				</tooloptions>
 				<vars>
-					<var>AC_CM
-						<value>1</value>
-					</var>
-					<var>AC_DM
-						<value>0</value>
-					</var>
-					<var>F1
-						<value>1M</value>
-					</var>
-					<var>F2
-						<value>500M</value>
-					</var>
 					<var>Vbias
 						<value>1.4</value>
 					</var>
@@ -64,12 +52,6 @@
 					<output>(db(((OutP + OutN) / 2)))
 						<evalType>point</evalType>
 					</output>
-					<output>AvCMAC
-						<evalType>point</evalType>
-					</output>
-					<output>PhaseDMAC
-						<evalType>point</evalType>
-					</output>
 				</outputs>
 			</test>
 		</tests>
@@ -86,7 +68,7 @@
 		</checksasserts>
 		<plottingoptions>
 			<plottingoption>waveformtemplate
-				<value></value>
+				<value>(None)</value>
 			</plottingoption>
 			<plottingoption>plottingmode
 				<value>Append</value>
@@ -98,7 +80,7 @@
 				<value>no</value>
 			</plottingoption>
 			<plottingoption>useMaestroPlottingTemplate
-				<value>no</value>
+				<value>yes</value>
 			</plottingoption>
 			<plottingoption>allplottingtemplates
 				<value></value>
@@ -130,5 +112,6 @@
 		<overwritehistoryname>ExplorerRun.0</overwritehistoryname>
 		<defaultreliabilitymode>Reliability</defaultreliabilitymode>
 	</active>
-	<history>History</history>
+	<history>History
+	</history>
 </setupdb>
