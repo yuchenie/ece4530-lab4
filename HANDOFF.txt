@@ -18,7 +18,7 @@ Metric                       Requirement       Measured result
 --------------------------------------------------------------------
 Open-loop gain               > 90 dB           92.14 dB
 Unity-gain bandwidth         > 25 MHz          30.67 MHz
-Unity-gain phase margin       > 60 degrees      63.44 degrees
+Unity-gain phase margin      > 60 degrees      63.44 degrees
 DC power                     < 10 mW           4.21 mW
 Output resistance            < 10 kOhm         1.81 kOhm at 1 Hz
 Output swing                 > 1.0 Vpp         At least 1.51 Vpp
