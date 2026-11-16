@@ -3,3 +3,9 @@
 *.bak
 */maestro/results/
 */maestro/history/
+
+# Cadence recovery files and local validation output
+*.oa-
+*.oa~
+/validation/runs/
+__pycache__/

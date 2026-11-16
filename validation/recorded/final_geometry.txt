@@ -1,0 +1,24 @@
+NM11 cell=nmos1v W="240n" L="160n" m="20" R=nil C=nil terminals=(("D" "net16") ("B" "gnd") ("G" "net15") ("S" "gnd"))
+NM12 cell=nmos1v W="240n" L="160n" m="1" R=nil C=nil terminals=(("D" "net15") ("B" "gnd") ("G" "net15") ("S" "gnd"))
+NM6 cell=nmos1v W="8.64u" L="1.92u" m="10" R=nil C=nil terminals=(("D" "net6") ("B" "gnd") ("G" "in+") ("S" "net16"))
+NM7 cell=nmos1v W="8.64u" L="1.92u" m="10" R=nil C=nil terminals=(("D" "net8") ("B" "gnd") ("G" "in-") ("S" "net16"))
+NM9 cell=nmos1v W="8.64u" L="1.92u" m="10" R=nil C=nil terminals=(("D" "CMID") ("B" "gnd") ("G" "net1") ("S" "net6"))
+NM8 cell=nmos1v W="8.64u" L="1.92u" m="10" R=nil C=nil terminals=(("D" "net2") ("B" "gnd") ("G" "net1") ("S" "net8"))
+NM13 cell=nmos1v W="1.92u" L="1.28u" m="80" R=nil C=nil terminals=(("D" "out") ("B" "gnd") ("G" "net15") ("S" "gnd"))
+PIN4 cell=iopin W=nil L=nil m=nil R=nil C=nil terminals=nil
+PIN8 cell=iopin W=nil L=nil m=nil R=nil C=nil terminals=nil
+PIN7 cell=iopin W=nil L=nil m=nil R=nil C=nil terminals=nil
+PIN3 cell=iopin W=nil L=nil m=nil R=nil C=nil terminals=nil
+PIN2 cell=iopin W=nil L=nil m=nil R=nil C=nil terminals=nil
+PIN1 cell=iopin W=nil L=nil m=nil R=nil C=nil terminals=nil
+C_MILLER cell=cap W="" L="" m="" R=nil C="6p" terminals=(("MINUS" "NCOMP") ("PLUS" "CMID"))
+R_ZERO cell=res W="" L="" m="" R="125" C="" terminals=(("MINUS" "out") ("PLUS" "NCOMP"))
+R18 cell=res W="" L="" m="" R="190K" C="" terminals=(("MINUS" "net1") ("PLUS" "net15"))
+R15 cell=res W="" L="" m="" R="10K" C="" terminals=(("MINUS" "net3") ("PLUS" "Ibias"))
+PM4 cell=pmos1v W="280n" L="160n" m="1" R=nil C=nil terminals=(("D" "net1") ("B" "vdd") ("G" "net3") ("S" "vdd"))
+PM5 cell=pmos1v W="280n" L="160n" m="1" R=nil C=nil terminals=(("D" "net3") ("B" "vdd") ("G" "net3") ("S" "vdd"))
+PM3 cell=pmos1v W="10u" L="1.92u" m="10" R=nil C=nil terminals=(("D" "S") ("B" "vdd") ("G" "net2") ("S" "vdd"))
+PM2 cell=pmos1v W="10u" L="1.92u" m="10" R=nil C=nil terminals=(("D" "CMID") ("B" "vdd") ("G" "Ibias") ("S" "S"))
+PM1 cell=pmos1v W="10u" L="1.92u" m="10" R=nil C=nil terminals=(("D" "net14") ("B" "vdd") ("G" "net2") ("S" "vdd"))
+PM0 cell=pmos1v W="10u" L="1.92u" m="10" R=nil C=nil terminals=(("D" "net2") ("B" "vdd") ("G" "Ibias") ("S" "net14"))
+PM6 cell=pmos1v W="6.72u" L="1.28u" m="80" R=nil C=nil terminals=(("D" "out") ("B" "vdd") ("G" "CMID") ("S" "vdd"))

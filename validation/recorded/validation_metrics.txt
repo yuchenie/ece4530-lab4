@@ -1,0 +1,10 @@
+ROUT_1Hz=1811.160496_ohm ROUT_100Hz=1798.134883_ohm
+SWING ain=1_uV low=1.3602352 high=1.4406155 Vpp=0.0803803 gain_fund=92.08223_dB compression=0.00000_dB
+SWING ain=10_uV low=1.0410843 high=1.8516366 Vpp=0.8105523 gain_fund=92.14266_dB compression=-0.06043_dB
+SWING ain=15_uV low=0.8895661 high=2.0998004 Vpp=1.2102343 gain_fund=92.14462_dB compression=-0.06239_dB
+SWING ain=20_uV low=0.7535601 high=2.2615251 Vpp=1.5079651 gain_fund=91.81311_dB compression=0.26912_dB
+SWING ain=25_uV low=0.6314160 high=2.3226267 Vpp=1.6912108 gain_fund=91.16835_dB compression=0.91388_dB
+SWING ain=30_uV low=0.5218977 high=2.3508425 Vpp=1.8289447 gain_fund=90.45289_dB compression=1.62934_dB
+SWING ain=40_uV low=0.3387999 high=2.3805911 Vpp=2.0417912 gain_fund=89.11842_dB compression=2.96381_dB
+gain10 low=0.89980101 high=1.89897228 tr10_90=97.10501_ns tf90_10=103.37807_ns SRrise_avg=8.23168_Vperus SRfall_avg=7.73217_Vperus overshoot=-0.09827_pct undershoot=-0.02116_pct lateError=0.003826599_V
+unity low=1.38995540 high=1.40995504 tr10_90=8.92330_ns tf90_10=8.74733_ns SRrise_avg=1.79303_Vperus SRfall_avg=1.82910_Vperus overshoot=7.46161_pct undershoot=6.80863_pct lateError=0.000000290_V

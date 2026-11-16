@@ -1,0 +1,170 @@
+LAB 4 CIRCUIT HANDOFF
+November 15, 2026
+Design: lab4 / lab4_v1 / schematic
+
+1. OPERATING CONDITIONS AND RESULTS
+==================================
+
+Supply voltage        2.5 V
+Load capacitance      1 pF
+External bias current 10 uA
+Input common-mode     1.4 V
+Temperature           27 C
+Device models         Current gpdk045 configuration
+
+All six main requirements pass under these conditions.
+
+Metric                       Requirement       Measured result
+--------------------------------------------------------------------
+Open-loop gain               > 90 dB           92.14 dB
+Unity-gain bandwidth         > 25 MHz          30.67 MHz
+Unity-gain phase margin       > 60 degrees      63.44 degrees
+DC power                     < 10 mW           4.21 mW
+Output resistance            < 10 kOhm         1.81 kOhm at 1 Hz
+Output swing                 > 1.0 Vpp         At least 1.51 Vpp
+--------------------------------------------------------------------
+
+The verified 1.51 Vpp swing has about 0.33 dB gain compression at
+100 Hz, relative to the 10 uV input-amplitude reference. This is below
+the 3 dB limit. The exact maximum swing has not been refined.
+
+The DC output is 1.39955 V. All 14 MOSFETs operate in saturation
+(region = 2). The smallest saturation margin is about 71.47 mV at PM0.
+
+Power is calculated from the V3 supply current and excludes the
+external testbench divider. These are schematic-level results for the
+conditions above, not PVT or post-layout results.
+
+
+2. FINAL DEVICE SIZES AND COMPONENT VALUES
+=========================================
+
+W and L below are in micrometers. W is the effective CDF width per
+device/finger; m is the parallel multiplier.
+
+Devices                    W (um)     L (um)       m
+----------------------------------------------------
+PM0, PM1, PM2, PM3          10.00       1.92        10
+NM6, NM7, NM8, NM9           8.64       1.92        10
+PM6                         6.72       1.28        80
+NM13                        1.92       1.28        80
+NM11                        0.24       0.16        20
+NM12                        0.24       0.16         1
+PM4, PM5                    0.28       0.16         1
+----------------------------------------------------
+
+R15 = 10 kOhm
+R18 = 190 kOhm
+
+Compensation connection:
+    CMID -- C_MILLER (6 pF) -- NCOMP -- R_ZERO (125 Ohm) -- VOUT
+
+NM12 is diode-connected:
+    Drain = Gate = net15
+    Source = Bulk = gnd
+
+Use the effective PM0-PM3 width of 10.00 um shown above. The CDF limits
+the requested 10.08 um value to 10.00 um. The exported device properties
+and generated netlist are the reference for the final values.
+
+
+3. VERIFICATION METHODS
+=======================
+
+DC and AC
+---------
+The DC servo remains connected, and the original 9 kOhm feedback
+branch is isolated. The AC input magnitude is 1 V and CL is 1 pF.
+The final ADE run used for the reported DC/AC results is Interactive.8.
+
+Output resistance
+-----------------
+Set the input AC magnitude to zero. Inject 1 A AC from ground into
+the output, with zero DC current. The output-voltage magnitude then
+gives the output impedance.
+
+Measured values:
+    1 Hz:    1.81116 kOhm
+    100 Hz:  1.79813 kOhm
+
+Open-loop output swing
+----------------------
+Keep the DC servo and apply a 100 Hz sine wave. Sweep input peak
+amplitude through 1, 10, 15, 20, 25, 30, and 40 uV. Run each simulation
+for 30 ms and analyze the final cycle, from 20 to 30 ms.
+
+Gain is calculated from the fundamental amplitude using 1,000 samples
+over that cycle. Output swing is the measured peak-to-peak voltage.
+
+Input peak amplitude     Output swing      Fundamental gain
+------------------------------------------------------------
+10 uV                    0.81055 Vpp        92.14265 dB
+15 uV                    1.21023 Vpp        92.14462 dB
+20 uV                    1.50797 Vpp        91.81311 dB
+30 uV                    1.82894 Vpp        90.45289 dB
+40 uV                    2.04179 Vpp        89.11842 dB
+------------------------------------------------------------
+
+At 40 uV input, compression is approximately 3.024 dB relative to the
+10 uV reference. The 3 dB boundary lies between the tested 30 and
+40 uV amplitudes. Report the conservative verified swing of at least
+1.51 Vpp unless the boundary is refined.
+
+The compression column in validation_metrics.txt uses the 1 uV
+reference instead. Its gain is about 0.0604 dB below the 10 uV
+reference. State the reference amplitude when quoting compression.
+
+
+4. CLOSED-LOOP VERIFICATION
+==========================
+
+Gain of 10
+----------
+RF = 9 kOhm; RG = 1 kOhm connected to a 1.4 V reference.
+Input step: 1.35 V to 1.45 V. Load: 1 pF.
+
+Output levels             0.89980 V to 1.89897 V
+10-90% rise time           97.11 ns
+90-10% fall time           103.38 ns
+Average rising slope      8.23 V/us
+Average falling slope    -7.73 V/us
+
+These slopes are averages over the 10-90% transition. They are not
+slew-rate measurements taken from the steepest linear segment.
+
+Unity gain
+----------
+Input step: 20 mV. Load: 1 pF.
+
+10-90% rise time           8.923 ns
+90-10% fall time           8.747 ns
+Overshoot                 7.46%
+Undershoot                5.81%
+
+The response settles without sustained oscillation.
+
+All 10 standalone validation simulations completed with exit code 0.
+ADE netlisting reported zero errors and zero warnings. Spectre still
+reported warnings associated with the isolated testbench branch.
+
+
+5. NOTES FOR THE NEXT TEAM MEMBER
+================================
+
+- The main requirements pass, but the remaining margin is modest:
+  about 3.44 degrees of phase margin and 5.67 MHz of bandwidth.
+  Further optimization can trade device area and power for margin.
+
+- The full lab report still needs CMRR, PSRR, output-current range,
+  maximum stable load, closed-loop input range, and the layout work
+  required for ECE 5530.
+
+- Results from earlier versions, including the 2 pF and 5 pF load
+  tests, do not characterize this final circuit.
+
+- Keep the Cadence library name "lab4" when using the project.
+  Update the local cds.lib path to match your own checkout.
+
+- The reference netlist and saved measurements describe the validated
+  circuit above. After changing the schematic, regenerate the netlist
+  and rerun the relevant checks before reusing these numbers.

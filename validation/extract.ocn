@@ -1,0 +1,26 @@
+unless(boundp('lab4ValidationResults) error("Set lab4ValidationResults to your results directory before loading this file.\n"))
+let((root fp v pp lo hi cs sn amp refg gain ug v0 v1 dv tr tf)
+root=strcat(lab4ValidationResults "/")
+fp=outfile(strcat(root "validation_metrics.txt"))
+openResults(strcat(root "rout/psf"))
+fprintf(fp "ROUT_1Hz=%.6f_ohm ROUT_100Hz=%.6f_ohm\n" value(mag(getData("out" ?result 'ac)) 1) value(mag(getData("out" ?result 'ac)) 100))
+foreach(a list(1 10 15 20 25 30 40)
+openResults(strcat(root sprintf(nil "swing%d/psf" a)))
+v=getData("out" ?result 'tran)
+lo=ymin(clip(v 0.02 0.03)) hi=ymax(clip(v 0.02 0.03)) pp=hi-lo
+cs=0.0 sn=0.0
+for(k 0 999
+cs=cs+value(v 0.02+k*0.00001)*cos(6.283185307179586*k/1000)
+sn=sn+value(v 0.02+k*0.00001)*sin(6.283185307179586*k/1000))
+amp=2*sqrt(cs*cs+sn*sn)/1000
+gain=20*log10(amp/(a*1e-6))
+when(a==1 refg=gain)
+fprintf(fp "SWING ain=%d_uV low=%.7f high=%.7f Vpp=%.7f gain_fund=%.5f_dB compression=%.5f_dB\n" a lo hi pp gain refg-gain))
+foreach(n list("gain10" "unity")
+openResults(strcat(root n "/psf"))
+v=getData("out" ?result 'tran) v0=value(v 90n) v1=value(v 450n) dv=v1-v0
+tr=cross(clip(v 100n 400n) v0+0.9*dv 1 "rising")-cross(clip(v 100n 400n) v0+0.1*dv 1 "rising")
+tf=cross(clip(v 500n 900n) v0+0.1*dv 1 "falling")-cross(clip(v 500n 900n) v0+0.9*dv 1 "falling")
+fprintf(fp "%s low=%.8f high=%.8f tr10_90=%.5f_ns tf90_10=%.5f_ns SRrise_avg=%.5f_Vperus SRfall_avg=%.5f_Vperus overshoot=%.5f_pct undershoot=%.5f_pct lateError=%.9f_V\n" n v0 v1 tr*1e9 tf*1e9 0.8*dv/tr/1e6 0.8*dv/tf/1e6 100*(ymax(clip(v 100n 400n))-v1)/dv 100*(v0-ymin(clip(v 500n 900n)))/dv ymax(abs(clip(v 350n 450n)-v1))))
+close(fp))
+let((fp line) fp=infile(strcat(lab4ValidationResults "/validation_metrics.txt")) while(gets(line fp) printf("%s" line)) close(fp))

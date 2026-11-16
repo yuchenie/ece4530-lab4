@@ -52,3 +52,28 @@ git push
   your NetID in the name.
 - `.gitignore` keeps Cadence lock files (`*.cdslck*`), `.bak` files, and
   Maestro `results/` and `history/` folders out of the repo.
+
+## Validated circuit handoff
+
+The November 15 version is described in [HANDOFF.txt](HANDOFF.txt).
+It includes the final device sizes, operating conditions, measured results,
+verification methods, and remaining team tasks.
+
+- Use `lab4_v1/schematic` for the circuit and `lab4_testbench/maestro`
+  for the saved DC/AC setup.
+- Set Maestro's simulation directory to a writable path under your own
+  account. The saved `projectDir` is session-specific.
+- [validation/README.txt](validation/README.txt) explains the reference
+  netlist, standalone checks, and recorded measurements.
+- The PDK, licenses, raw PSF results, and recovery files are not distributed.
+  The reference netlist uses Cornell's installed gpdk045 model.
+
+Once the update is available on `main`, an existing clean checkout on that
+branch can be updated with:
+
+```
+git pull --ff-only origin main
+```
+
+For a fresh checkout, use the clone and `cds.lib` steps above.
+The library name must remain `lab4`.

@@ -1,0 +1,96 @@
+// Point Netlist Generated on: Nov 15 18:50:40 2026
+// Generated for: spectre
+// Design Netlist Generated on: Nov 15 18:50:39 2026
+// Design library name: lab4
+// Design cell name: lab4_testbench
+// Design view name: schematic
+simulator lang=spectre
+include "ade_e.scs"
+global 0
+parameters temperature=27 Vbias=1.4 vdd=2.5
+include "/opt/cadence-designkits/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+
+// Library name: lab4
+// Cell name: lab4_v1
+// View name: schematic
+subckt lab4_v1 Ibias gnd in\+ in\- out vdd
+    NM11 (net16 net15 gnd gnd) g45n1svt w=(240n) l=160n nf=1 as=33.6f \
+        ad=33.6f ps=760n pd=760n nrd=583.333m nrs=583.333m sa=140n sb=140n \
+        sd=160n sca=138.88889 scb=0.09162 scc=0.01611 m=(20)
+    NM12 (net15 net15 gnd gnd) g45n1svt w=(240n) l=160n nf=1 as=33.6f \
+        ad=33.6f ps=760n pd=760n nrd=583.333m nrs=583.333m sa=140n sb=140n \
+        sd=160n sca=138.88889 scb=0.09162 scc=0.01611 m=(1)
+    NM6 (net6 in\+ net16 gnd) g45n1svt w=(8.64u) l=1.92u nf=1 as=1.2096p \
+        ad=1.2096p ps=17.56u pd=17.56u nrd=16.2037m nrs=16.2037m sa=140n \
+        sb=140n sd=160n sca=8.54840 scb=0.00626 scc=0.00062 m=(10)
+    NM7 (net8 in\- net16 gnd) g45n1svt w=(8.64u) l=1.92u nf=1 as=1.2096p \
+        ad=1.2096p ps=17.56u pd=17.56u nrd=16.2037m nrs=16.2037m sa=140n \
+        sb=140n sd=160n sca=8.54840 scb=0.00626 scc=0.00062 m=(10)
+    NM9 (CMID net1 net6 gnd) g45n1svt w=(8.64u) l=1.92u nf=1 as=1.2096p \
+        ad=1.2096p ps=17.56u pd=17.56u nrd=16.2037m nrs=16.2037m sa=140n \
+        sb=140n sd=160n sca=8.54840 scb=0.00626 scc=0.00062 m=(10)
+    NM8 (net2 net1 net8 gnd) g45n1svt w=(8.64u) l=1.92u nf=1 as=1.2096p \
+        ad=1.2096p ps=17.56u pd=17.56u nrd=16.2037m nrs=16.2037m sa=140n \
+        sb=140n sd=160n sca=8.54840 scb=0.00626 scc=0.00062 m=(10)
+    NM13 (out net15 gnd gnd) g45n1svt w=(1.92u) l=1.28u nf=1 as=268.8f \
+        ad=268.8f ps=4.12u pd=4.12u nrd=72.9167m nrs=72.9167m sa=140n \
+        sb=140n sd=160n sca=23.59177 scb=0.01549 scc=0.00208 m=(80)
+    C_MILLER (CMID NCOMP) capacitor c=6p
+    R_ZERO (NCOMP out) resistor r=125
+    R18 (net15 net1) resistor r=190K
+    R15 (Ibias net3) resistor r=10K
+    PM4 (net1 net3 vdd vdd) g45p1svt w=(280n) l=160n nf=1 as=39.2f \
+        ad=39.2f ps=840n pd=840n nrd=500m nrs=500m sa=140n sb=140n sd=160n \
+        sca=125.81699 scb=0.08727 scc=0.01435 m=(1)
+    PM5 (net3 net3 vdd vdd) g45p1svt w=(280n) l=160n nf=1 as=39.2f \
+        ad=39.2f ps=840n pd=840n nrd=500m nrs=500m sa=140n sb=140n sd=160n \
+        sca=125.81699 scb=0.08727 scc=0.01435 m=(1)
+    PM3 (S net2 vdd vdd) g45p1svt w=(10u) l=1.92u nf=1 as=1.4p ad=1.4p \
+        ps=20.28u pd=20.28u nrd=14m nrs=14m sa=140n sb=140n sd=160n \
+        sca=8.03043 scb=0.00599 scc=0.00057 m=(10)
+    PM2 (CMID Ibias S vdd) g45p1svt w=(10u) l=1.92u nf=1 as=1.4p ad=1.4p \
+        ps=20.28u pd=20.28u nrd=14m nrs=14m sa=140n sb=140n sd=160n \
+        sca=8.03043 scb=0.00599 scc=0.00057 m=(10)
+    PM1 (net14 net2 vdd vdd) g45p1svt w=(10u) l=1.92u nf=1 as=1.4p ad=1.4p \
+        ps=20.28u pd=20.28u nrd=14m nrs=14m sa=140n sb=140n sd=160n \
+        sca=8.03043 scb=0.00599 scc=0.00057 m=(10)
+    PM0 (net2 Ibias net14 vdd) g45p1svt w=(10u) l=1.92u nf=1 as=1.4p \
+        ad=1.4p ps=20.28u pd=20.28u nrd=14m nrs=14m sa=140n sb=140n \
+        sd=160n sca=8.03043 scb=0.00599 scc=0.00057 m=(10)
+    PM6 (out CMID vdd vdd) g45p1svt w=(6.72u) l=1.28u nf=1 as=940.8f \
+        ad=940.8f ps=13.72u pd=13.72u nrd=20.8333m nrs=20.8333m sa=140n \
+        sb=140n sd=160n sca=11.67318 scb=0.00896 scc=0.00085 m=(80)
+ends lab4_v1
+// End of subcircuit definition.
+
+// Library name: lab4
+// Cell name: lab4_testbench
+// View name: schematic
+V0 (in\+ 0) vsource dc=Vbias mag=1 type=sine
+V1 (net1 0) vsource dc=vdd type=dc
+V3 (net4 0) vsource dc=vdd type=dc
+I7 (net6 0) isource dc=10u type=dc
+E2 (in\- 0 net2 0) vcvs gain=1.0
+E1 (net10 0 out 0) vcvs gain=1.0
+I9 (net6 0 in\+ in\- out net4) lab4_v1
+C0 (out 0) capacitor c=1p
+C1 (net2 0) capacitor c=1
+R3 (net5 net3) resistor r=9K
+R2 (0 net3) resistor r=2.401K
+R1 (net3 net1) resistor r=1.715K
+R0 (net2 net10) resistor r=1M
+simulatorOptions options psfversion="1.4.0" reltol=1e-3 vabstol=1e-6 \
+    iabstol=1e-12 temp=27 tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 \
+    maxnotes=5 maxwarns=5 digits=5 cols=80 pivrel=1e-3 \
+    sensfile="../psf/sens.output" checklimitdest=psf
+ac ac start=1 stop=10G dec=1000 annotate=status
+dcOp dc write="spectre.dc" maxiters=150 maxsteps=10000 annotate=status
+dcOpInfo info what=oppoint where=rawfile
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts where=rawfile
+save out
+saveOptions options save=all pwr=none currents=all

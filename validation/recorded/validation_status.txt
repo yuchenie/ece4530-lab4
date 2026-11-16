@@ -1,0 +1,10 @@
+rout exit=0
+swing1 exit=0
+swing10 exit=0
+swing15 exit=0
+swing20 exit=0
+swing25 exit=0
+swing30 exit=0
+swing40 exit=0
+gain10 exit=0
+unity exit=0
