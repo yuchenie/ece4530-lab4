@@ -91,6 +91,12 @@
 					<output>deriv(v("/out" ?result "dc"))
 						<evalType>point</evalType>
 					</output>
+					<output>dB20(VF("/out"))
+						<evalType>point</evalType>
+					</output>
+					<output>phase(VF("/out"))
+						<evalType>point</evalType>
+					</output>
 				</outputs>
 			</test>
 		</tests>
