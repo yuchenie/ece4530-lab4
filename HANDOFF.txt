@@ -1,5 +1,5 @@
 LAB 4 CIRCUIT HANDOFF
-November 15, 2026
+November 15, 2026 (updated November 17, 2026)
 Design: lab4 / lab4_v1 / schematic
 
 1. OPERATING CONDITIONS AND RESULTS
@@ -14,11 +14,17 @@ Device models         Current gpdk045 configuration
 
 All six main requirements pass under these conditions.
 
+Update (Nov 17): C_MILLER / R_ZERO were retuned for more phase margin
+and bandwidth (UGBW 30.67 -> 35.58 MHz, PM 63.44 -> 81.44 degrees).
+Compensation only affects the high-frequency response, so the DC gain,
+power, output resistance, swing and other low-frequency results below
+are unchanged.
+
 Metric                       Requirement       Measured result
 --------------------------------------------------------------------
 Open-loop gain               > 90 dB           92.14 dB
-Unity-gain bandwidth         > 25 MHz          30.67 MHz
-Unity-gain phase margin      > 60 degrees      63.44 degrees
+Unity-gain bandwidth         > 25 MHz          35.58 MHz
+Unity-gain phase margin      > 60 degrees      81.44 degrees
 DC power                     < 10 mW           4.21 mW
 Output resistance            < 10 kOhm         1.81 kOhm at 1 Hz
 Output swing                 > 1.0 Vpp         At least 1.51 Vpp
@@ -34,6 +40,28 @@ The DC output is 1.39955 V. All 14 MOSFETs operate in saturation
 Power is calculated from the V3 supply current and excludes the
 external testbench divider. These are schematic-level results for the
 conditions above, not PVT or post-layout results.
+
+Additional characterization (added Nov 17)
+------------------------------------------
+Metric                        Result
+--------------------------------------------------------------------
+CMRR (low frequency)          100.35 dB
+PSRR (low frequency)          91.8 dB
+Output current, max (source)  +65.88 mA
+Output current, min (sink)    -1.487 mA
+Closed-loop input range       1.32 V to 1.56 V (gain of 10)
+Slew rate                     11.85 V/us (11.85e6 V/s)
+Closed-loop bandwidth         [FILL IN] (gain of 10; about 3.6 MHz
+                              expected from 0.35 / 97.11 ns rise time)
+Maximum stable load           not yet recorded
+--------------------------------------------------------------------
+Output-current limits use the point where Vout moves 100 mV from the
+no-load value (about 1.4 V). Positive current is sourced by the op-amp.
+The sink limit is much smaller than the source limit, most likely
+because of the NM13 current-sink stage.
+Closed-loop input range is where the gain-of-10 DC transfer curve
+falls by 1 dB (to 8.9 V/V).
+Plots are in ece4530-lab4/graphs.
 
 
 2. FINAL DEVICE SIZES AND COMPONENT VALUES
@@ -57,7 +85,21 @@ R15 = 10 kOhm
 R18 = 190 kOhm
 
 Compensation connection:
-    CMID -- C_MILLER (6 pF) -- NCOMP -- R_ZERO (125 Ohm) -- VOUT
+    CMID -- C_MILLER ([FILL IN] pF) -- NCOMP -- R_ZERO ([FILL IN] Ohm) -- VOUT
+
+Compensation tuning history (UGBW and PM from the open-loop AC run):
+    C_MILLER   R_ZERO    UGBW         PM
+    6 pF       125 Ohm   30.67 MHz    63.44 deg   (previous version)
+    6 pF       200 Ohm   --           about 68.6 deg
+    6 pF       300 Ohm   34.48 MHz    about 74 deg
+    final      final     35.58 MHz    81.44 deg
+Raising R_ZERO moves the Miller zero into the left half plane, adding
+phase lead near the crossover. When C_MILLER is changed, keep
+C_MILLER * R_ZERO roughly constant to hold the zero location.
+
+A trial with longer PM6/NM13 (L 1.28 -> 1.60 um, W 8.40 / 2.40 um, m80)
+lowered the gain to about 91 dB instead of raising it. The cause was
+not diagnosed, and the original PM6/NM13 sizes above were restored.
 
 NM12 is diode-connected:
     Drain = Gate = net15
@@ -75,7 +117,9 @@ DC and AC
 ---------
 The DC servo remains connected, and the original 9 kOhm feedback
 branch is isolated. The AC input magnitude is 1 V and CL is 1 pF.
-The final ADE run used for the reported DC/AC results is Interactive.8.
+The ADE run used for the reported DC/AC results is Interactive.8
+(older compensation). The run with the final C_MILLER / R_ZERO is
+[FILL IN run name].
 
 Output resistance
 -----------------
@@ -86,6 +130,28 @@ gives the output impedance.
 Measured values:
     1 Hz:    1.81116 kOhm
     100 Hz:  1.79813 kOhm
+
+CMRR
+----
+Open loop, DC servo connected. A series source at the inverting input
+has its AC magnitude set to acm_cm. AC analysis with acm_in = 1,
+acm_cm = 0 gives Avd; with acm_in = 0, acm_cm = 1 gives Acm.
+    CMRR = Avd(dB) - Acm(dB) = 100.35 dB at low frequency
+
+PSRR
+----
+Same testbench with acm_vdd = 1 (V3 AC) and acm_in = acm_cm = 0 gives
+Add. Add is about +0.2 dB (0.2066 dB), so PSRR is approximately Avd(f).
+    PSRR = Avd(dB) - Add(dB) = 91.8 dB at low frequency
+(Avd was 92 dB in this measurement.)
+
+Output current range
+--------------------
+I19 (idc) must be a shunt source from OUT to GND, not in series with the
+out-to-E1 sense wire. DC sweep iout from negative to positive; plot
+Vout and find where it moves 100 mV from the no-load value.
+    Max (source):  +65.88 mA
+    Min (sink):    -1.487 mA
 
 Open-loop output swing
 ----------------------
@@ -131,6 +197,29 @@ Average falling slope    -7.73 V/us
 
 These slopes are averages over the 10-90% transition. They are not
 slew-rate measurements taken from the steepest linear segment.
+The slew rate (steepest slope of the output edge, via the derivative
+of Vout) is 11.85 V/us, higher than the averages above.
+
+Lab divider testbench (alternate gain-of-10)
+--------------------------------------------
+R1 = 1.715 kOhm to VDD, R2 = 2.401 kOhm to GND, R3 = 9 kOhm feedback.
+The Thevenin reference is V_th = 1.458 V, so
+    Vout = 10 * Vin - 9 * V_th = 10 * Vin - 13.125 (V)
+A 1.35 V to 1.45 V input step gives about 0.38 V to 1.38 V here, versus
+0.90 V to 1.90 V with RG tied to the 1.4 V reference above.
+
+Closed-loop input range
+-----------------------
+Method: DC sweep of the input (1.2 V to 1.6 V, 2 mV steps) on the
+gain-of-10 circuit. Find where the slope of the transfer curve (deriv)
+drops 1 dB, i.e. 10 * 10^(-1/20) = 8.9 V/V.
+    Range: 1.32 V to 1.56 V (about -80 mV / +160 mV about 1.4 V)
+    Symmetric about 1.4 V: about +/-80 mV
+A 100 Hz transient confirmation was not recorded.
+
+Closed-loop bandwidth: [FILL IN] (not recorded in this file; the slew
+rate and closed-loop bandwidth are assumed unchanged by the
+compensation retune).
 
 Unity gain
 ----------
@@ -151,19 +240,27 @@ reported warnings associated with the isolated testbench branch.
 5. NOTES FOR THE NEXT TEAM MEMBER
 ================================
 
-- The main requirements pass, but the remaining margin is modest:
-  about 3.44 degrees of phase margin and 5.67 MHz of bandwidth.
-  Further optimization can trade device area and power for margin.
+- The main requirements pass with margin: 21.44 degrees of phase
+  margin, 10.58 MHz of bandwidth, 5.79 mW of power, 8.19 kOhm of
+  output resistance, and 2.14 dB of gain (the tightest margin).
+  Gain is the best spot for further bonus work (next bonus point at
+  93 dB).
 
-- The full lab report still needs CMRR, PSRR, output-current range,
-  maximum stable load, closed-loop input range, and the layout work
-  required for ECE 5530.
+- The full lab report still needs the maximum stable load and the
+  layout work required for ECE 5530.
+
+- Testbench pitfalls: I19 must be a shunt OUT-to-GND source. For
+  closed-loop runs, disconnect E2 from the inverting input and wire both
+  nc markers.
 
 - Results from earlier versions, including the 2 pF and 5 pF load
   tests, do not characterize this final circuit.
 
 - Keep the Cadence library name "lab4" when using the project.
   Update the local cds.lib path to match your own checkout.
+
+- The reference netlist of Nov 15 predates the compensation change.
+  Regenerate it before reuse.
 
 - The reference netlist and saved measurements describe the validated
   circuit above. After changing the schematic, regenerate the netlist
