@@ -37,6 +37,18 @@
 					<var>vdd
 						<value>2.5</value>
 					</var>
+					<var>acm_cm
+						<value></value>
+					</var>
+					<var>acm_in
+						<value></value>
+					</var>
+					<var>acm_vdd
+						<value></value>
+					</var>
+					<var>iout
+						<value></value>
+					</var>
 				</vars>
 				<origoptions></origoptions>
 				<outputs>
@@ -55,6 +67,30 @@
 					<output>db20(VF("/out"))
 						<evalType>point</evalType>
 					</output>
+					<output>VDC("/out'))) ")
+						<evalType>point</evalType>
+					</output>
+					<output>VDC("/out ")
+						<evalType>point</evalType>
+					</output>
+					<output>VDC("/out")
+						<evalType>point</evalType>
+					</output>
+					<output>VDC("/in+)) ")
+						<evalType>point</evalType>
+					</output>
+					<output>VDC("/in+")
+						<evalType>point</evalType>
+					</output>
+					<output>VDC("/in-")
+						<evalType>point</evalType>
+					</output>
+					<output>VT("/out")
+						<evalType>point</evalType>
+					</output>
+					<output>deriv(v("/out" ?result "dc"))
+						<evalType>point</evalType>
+					</output>
 				</outputs>
 			</test>
 		</tests>
@@ -71,7 +107,7 @@
 		</checksasserts>
 		<plottingoptions>
 			<plottingoption>waveformtemplate
-				<value>(None)</value>
+				<value></value>
 			</plottingoption>
 			<plottingoption>plottingmode
 				<value>Append</value>
@@ -83,7 +119,7 @@
 				<value>no</value>
 			</plottingoption>
 			<plottingoption>useMaestroPlottingTemplate
-				<value>yes</value>
+				<value>no</value>
 			</plottingoption>
 			<plottingoption>allplottingtemplates
 				<value></value>
@@ -96,6 +132,87 @@
 			</plottingoption>
 			<plottingoption>autoplotmode
 				<value>Append</value>
+			</plottingoption>
+			<plottingoption>autoplotsignals
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>autoplotwaveexpr
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>autoplotscalarexpr
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>annotatedesignname
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>annotatesimdate
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>annotatetemperature
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>annotatedesignvars
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>annotatescalaroutputs
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>annotatespecmarkers
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>histogramtype
+				<value>pass/fail</value>
+			</plottingoption>
+			<plottingoption>histogrambins
+				<value>10</value>
+			</plottingoption>
+			<plottingoption>showhistogramdensity
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>showhistogramdeviation
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>showhistogrampercentmarkers
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>histogramqqplot
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>showhistogrampoints
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>additionalcalcs
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>exactmatchonly
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>createnewstrips
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>usecolorbank
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>quickplotenable
+				<value>yes</value>
+			</plottingoption>
+			<plottingoption>useExpressionDB
+				<value>no</value>
+			</plottingoption>
+			<plottingoption>probingmode
+				<value>current</value>
+			</plottingoption>
+			<plottingoption>directplotmode
+				<value>Append</value>
+			</plottingoption>
+			<plottingoption>directplotafter
+				<value>All Selections Are Made</value>
+			</plottingoption>
+			<plottingoption>printafter
+				<value>Each Selection</value>
+			</plottingoption>
+			<plottingoption>distributedplot_linger_time
+				<value>60</value>
 			</plottingoption>
 		</plottingoptions>
 		<exploreroptions>
@@ -117,6 +234,33 @@
 		<incrementalsimulationoptions>
 			<incrementalSimulation>0</incrementalSimulation>
 		</incrementalsimulationoptions>
+		<vars>
+			<var enabled="1">acm_cm
+				<value>0</value>
+				<dependentTests>
+					<dependentTest omitted="0">ECE4530_2026_MP2_test_bench_1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>acm_in
+				<value>1</value>
+				<dependentTests>
+					<dependentTest omitted="0">ECE4530_2026_MP2_test_bench_1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>acm_vdd
+				<value>0</value>
+				<dependentTests>
+					<dependentTest omitted="0">ECE4530_2026_MP2_test_bench_1</dependentTest>
+				</dependentTests>
+			</var>
+			<var>iout
+				<value>0</value>
+				<dependentTests>
+					<dependentTest omitted="0">ECE4530_2026_MP2_test_bench_1</dependentTest>
+				</dependentTests>
+			</var>
+		</vars>
+		<allvarsdisabled>0</allvarsdisabled>
 	</active>
 	<history>History
 	</history>
